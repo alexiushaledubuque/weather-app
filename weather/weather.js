@@ -12,7 +12,10 @@ const getWeather = (lat, lng, callback) => {
 		if (error) {
 			callback('Unable to connect to Darksky servers');
 		} else if (!error && response.statusCode === 200) {
-			callback(body.currently.temperature);	
+			callback(undefined, {
+				temperature: body.currently.temperature,
+				apparently: body.currently.apparentTemperature
+			});	
 		} else {
 			callback('Unable to fetch weather from darksky api!');
 		}
